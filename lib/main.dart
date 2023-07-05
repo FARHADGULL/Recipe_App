@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:starter/screens/recipe_details.dart';
+import 'package:starter/screens/recipes_screen.dart';
+import 'package:starter/screens/tobuy_screen.dart';
 import 'fooderlich_theme.dart';
 import 'home.dart';
 
@@ -19,7 +22,14 @@ class Fooderlich extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: theme,
       title: 'Fooderlich',
-      home: const Home(),
+      //home: const Home(),
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => const Home()),
+        GetPage(name: '/tobuy', page: () => const ToBuyScreen()),
+        GetPage(name: '/recipes', page: () => RecipesScreen()),
+        GetPage(name: '/recipe_details', page: () => RecipeDetils(arguments: {},)),
+      ],
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:starter/models/models.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
@@ -14,6 +15,12 @@ class RecipeDetailScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          child: GestureDetector(
+            onTap: () {
+              Get.toNamed('/recipe_details', arguments: {'recipe': recipe});
+            },
+
+          
           child: Card(
               child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -38,6 +45,7 @@ class RecipeDetailScreen extends StatelessWidget {
           )),
         ),
       ),
+    ),
     );
   }
 }

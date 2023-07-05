@@ -3,7 +3,7 @@ import '../models/models.dart';
 
 class SimpleRecipeListView extends StatelessWidget {
   final List<SimpleRecipe>? recipes;
-  const SimpleRecipeListView({Key? key, this.recipes}) : super(key: key);
+  const SimpleRecipeListView({Key? key, this.recipes, required Null Function(dynamic recipe) onTap,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
