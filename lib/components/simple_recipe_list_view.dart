@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../models/models.dart';
+import '../screens/recipe_details.dart';
 
 class SimpleRecipeListView extends StatelessWidget {
-  final List<SimpleRecipe>? recipes;
-  const SimpleRecipeListView({Key? key, this.recipes, required Null Function(dynamic recipe) onTap,}) : super(key: key);
+  final List<SimpleRecipe>? myrecipe;
+  const SimpleRecipeListView({Key? key, this.myrecipe,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,13 +18,13 @@ class SimpleRecipeListView extends StatelessWidget {
           Container(
             height: 600,
             color: Colors.transparent,
-            child: recipes!.isEmpty
+            child: myrecipe!.isEmpty
                 ? const Text('No Recipes')
                 : ListView.separated(
                     scrollDirection: Axis.vertical,
-                    itemCount: recipes!.length,
+                    itemCount: myrecipe!.length,
                     itemBuilder: (context, index) {
-                      final recipe = recipes?[index];
+                      final recipe = myrecipe?[index];
                       return buildCard(recipe);
                     },
                     separatorBuilder: (context, index) {
@@ -35,29 +37,35 @@ class SimpleRecipeListView extends StatelessWidget {
   }
 
   Widget buildCard(SimpleRecipe? recipe) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Image.asset(recipe!.dishImage),
-            const SizedBox(height: 14),
-            Text(recipe.title,
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black)),
-            const SizedBox(height: 8),
-            Text(recipe.duration,
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black)),
-          ],
-        ),
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => RecipeDetils(recipe: recipe));
+      },
+  child: Card(
+    elevation: 2,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    child: Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          Image.asset(recipe!.dishImage),
+          const SizedBox(height: 14),
+          Text(recipe.title,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black)),
+          const SizedBox(height: 8),
+          Text(recipe.duration,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black)),
+        ],
       ),
+    ),
+  ),
     );
+
   }
 }

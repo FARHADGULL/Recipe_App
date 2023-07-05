@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:starter/models/simple_recipe.dart';
 
 class RecipeDetils extends StatelessWidget {
-  final Map<String, dynamic> arguments;
-
-  const RecipeDetils({Key? key, required this.arguments}) : super(key: key);
+  final SimpleRecipe recipe;
+  const RecipeDetils({Key? key, required this.recipe,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //final SimpleRecipe recipe = arguments['recipe'];
-
+    //final myrecipe = arguments['recipe'] as String;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -25,13 +24,18 @@ class RecipeDetils extends StatelessWidget {
               ],
             ),
             bottom: PreferredSize(
-              preferredSize:  Size.fromHeight(40),
+              preferredSize:  const Size.fromHeight(40),
               child: Container(
-                color: Colors.white,
                 width: double.maxFinite,
-                padding: EdgeInsets.only(top: 5, bottom: 10),
-                
-                child:  Center(child: Text('Recipe Title', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15)
+                  )
+                ),
+                child: Center(child: Text(recipe.title, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),)),
               ),
             ),
             pinned: true,
@@ -39,7 +43,7 @@ class RecipeDetils extends StatelessWidget {
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                'assets/mag1.png',
+                recipe.dishImage,
                 fit: BoxFit.cover,
                 width: double.maxFinite,
               ),
@@ -47,8 +51,9 @@ class RecipeDetils extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl. Donec euismod, nisl eget aliquet ultricies, nunc nisl aliquam nunc, quis aliquet nisl nisl quis nisl.',
-              style: Theme.of(context).textTheme.headline5,
+              //recipe information is a list of strings
+              recipe.information.join('\n\n'),
+              style: Theme.of(context).textTheme.headline6,
             ),
             )
         ],
