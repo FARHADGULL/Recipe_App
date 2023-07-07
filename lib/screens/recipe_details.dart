@@ -12,36 +12,39 @@ class RecipeDetils extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.clear, color: Colors.white),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+            // title: Row(
+            //   children: [
+            //     IconButton(
+            //       icon: const Icon(Icons.clear, color: Colors.white),
+            //       onPressed: () {
+            //         Navigator.pop(context);
+            //       },
+            //     ),
                
-              ],
-            ),
-            bottom: PreferredSize(
-              preferredSize:  const Size.fromHeight(40),
-              child: Container(
-                width: double.maxFinite,
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)
-                  )
-                ),
-                child: Center(child: Text(recipe.title, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),)),
-              ),
-            ),
+            //   ],
+            // ),
+            // bottom: PreferredSize(
+            //   preferredSize:  const Size.fromHeight(40),
+            //   child: Container(
+            //     width: double.maxFinite,
+            //     padding: const EdgeInsets.only(top: 10, bottom: 10),
+            //     decoration: const BoxDecoration(
+            //       color: Colors.white,
+            //       borderRadius: BorderRadius.only(
+            //         topLeft: Radius.circular(15),
+            //         topRight: Radius.circular(15)
+            //       )
+            //     ),
+                
+            //     //child: Center(child: Text(recipe.title, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),)),
+            //   ),
+            // ),
             pinned: true,
             backgroundColor: Colors.black,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
+              title: Text(recipe.title),
+              centerTitle: true,
               background: Image.asset(
                 recipe.dishImage,
                 fit: BoxFit.cover,
@@ -50,10 +53,13 @@ class RecipeDetils extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(
-            child: Text(
-              //recipe information is a list of strings
-              recipe.information.join('\n\n'),
-              style: Theme.of(context).textTheme.headline6,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                //recipe information is a list of strings
+                recipe.information.join('\n\n'),
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
             )
         ],
